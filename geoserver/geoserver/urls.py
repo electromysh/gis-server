@@ -13,9 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+from django.urls import re_path, path, include
 from django.contrib import admin
-from django.urls import path
+from rest_framework import routers
+
+from gis_app.api import CountryViewSet, CityViewSet
+
+
+router = routers.DefaultRouter()
+router.register('country', CountryViewSet)
+router.register('city', CityViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    re_path(r'^admin/', admin.site.urls),
+    path('gis-api/', include(router.urls)),
 ]
