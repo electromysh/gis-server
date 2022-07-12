@@ -20,12 +20,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
 
-from gis_app.api import CountryViewSet, CityViewSet
+from gis_app.api import CountryViewSet, CityViewSet, AreaBbox
 
 
 router = routers.DefaultRouter()
 router.register('country', CountryViewSet)
 router.register('city', CityViewSet)
+router.register('calc-area', AreaBbox, basename='calc-area')
 
 urlpatterns = [
     re_path(r'^admin/', admin.site.urls),
